@@ -1,0 +1,88 @@
+Part 4:
+To find duplicate numbers in an array if it contains multiple duplicates: (JAVA)
+Solution:
+I am using JAVA to solve the above problem statement. According to the problem statement we have to find the duplicate numbers in an array if it contains multiple duplicates.
+NOTE: If there are no duplicates in an array of elements it will print -1. (Negative Testcase)
+I am using HashMap for this problem to count frequency of occurrence of each element and the elements with frequency more than 1 is printed.
+HashMap is used to store the key/value pair. Here in the solution below both key and value are Integers, map.containsKey is used to check whether a particular key is being mapped into the HashMap or not. It takes the key element as a parameter and returns True if that element is mapped in the map. If TRUE it will put the key as arr[i] and value as count +1 else key as arr[i] and value as 1. HashMap.entrySet() method in Java is used to create a set out of the same elements contained in the hash map. If there are more than 1 value then print the value and Boolean value is set to true else print -1.
+
+Code:
+
+package efinancial_part4;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+/**
+ *
+ * @author Richa Singh
+ */
+public class Efinancial_Part4 {
+
+    /**
+     * @param args the command line arguments
+     */
+   public static void main(String[] args) 
+    { 
+        int arr[] = {3, 47, 200, 47, 3, 100000, 200, 3, 200}; 
+        int arr1[] = {12,11,40,12,5,6,5,12,11};
+        int arr2[] = {1,2,3,4,5};
+        int n = arr.length; 
+        int m = arr1.length;
+        int o = arr2.length;
+        printDuplicates(arr, n); 
+        System.out.println("");
+        printDuplicates(arr1, m);
+        System.out.println("");
+        printDuplicates(arr2, o);
+    } 
+   //Function to print Diplicate numbers
+    private static void printDuplicates(int[] arr, int n)  
+    { 
+        //Using Hash Map in order to reduce the complexity to O(n)
+        Map<Integer,Integer> map = new HashMap<>(); 
+        int count = 0; 
+        boolean duplicate = false; 
+        //loop to iterate from 0th index to the length-1 of the array
+        for(int i = 0; i < n; i++){ 
+            //check if the map contains the key at ith index
+            if(map.containsKey(arr[i])){ 
+                //to store the value in count variable
+                count = map.get(arr[i]); 
+                //storing the value in the hashmap in the form of key/value pair
+                map.put(arr[i], count + 1); 
+            } 
+            else{ 
+                map.put(arr[i], 1); 
+            } 
+        } 
+        //for loop in the set
+        for(Entry<Integer,Integer> entry : map.entrySet()) 
+        { 
+            // if frequency is more than 1 print the element 
+            if(entry.getValue() > 1){ 
+                System.out.print(entry.getKey()+ " "); 
+                duplicate = true; 
+            } 
+        } 
+        // no duplicates present then it will print -1
+        if(!duplicate){ 
+            System.out.println("-1"); 
+        } 
+    } 
+}     
+
+Output: (Test Case 1)
+run:
+3 200 47
+Input :
+[12, 11, 40, 12, 5, 6, 5, 12, 11]
+Output: (Test Case 2)
+run:
+12 11 5
+Input: (Test Case 3)
+[1, 2, 3, 4, 5]
+Output:
+run:
+-1
