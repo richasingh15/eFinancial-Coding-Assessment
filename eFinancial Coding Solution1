@@ -1,0 +1,82 @@
+eFinancial Coding Solution:
+
+Part 1:
+To find the length of the longest substring without repeating characters (JAVA)
+Solution:
+I am using JAVA to solve the above problem statement. According to the problem statement we have to find the longest substring from the given string which have unique characters in them.
+For example:
+Test Case 1: 
+Input = “abcabcbb”
+Output should be 3 as we can see the longest substring is “abc”. So, to get this output I am going to use a simple approach in which I will iterate from ‘0’ Index to the length-1 of the given String then store the character in an empty string “sub”. Use IF  to check if “sub” contains “str” , if TRUE then store the substring into “sub” – substring in JAVA is a method of STRING Class which is used to get a part of Original String as String Object, this method returns the part of the string starting from 0th Index up to the end of Original String. Else concatenate “sub” and “str” and check if the max value is less than length of “sub” string then max is equal to the length of “sub” string. This loop continues till the length-1 of the original string.
+After the for loop terminates check if value of max is Integer.MIN_VAL that is if the string is empty then return 0 else return the max value.
+Screenshot of Code with Output in Console:
+ 
+Code:
+package efinancial_part1;
+
+
+/**
+ *
+ * @author Richa Singh
+ */
+public class Efinancial_Part1 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        String a = "bbbbbbbbbbbbbbbbbbbbbbbb";
+        String b = "abcabcbb";
+        String c = "";
+        String d = "pqqkew";
+        int l,m,n,o;
+        l = lengthOfLongestSubstring(a);
+        m = lengthOfLongestSubstring(b);
+        n = lengthOfLongestSubstring(c);
+        o = lengthOfLongestSubstring(d);
+        System.out.println("The length of longest substring in the given string is:"+l);
+        System.out.println("The length of longest substring in the given string is:"+m);
+        System.out.println("The length of longest substring in the given string is:"+n);
+        System.out.println("The length of longest substring in the given string is:"+o);
+        
+    }
+    //method to find the length of Longest Substring with unique characters
+    static public int lengthOfLongestSubstring(String s) {
+
+    String sub="";
+    int max=Integer.MIN_VALUE; //initializing max value
+    //loop to iterate from 0th index of the string to the length-1 index of the string
+    for(int i=0;i<s.length();i++)
+    {
+       String str=""+s.charAt(i);//storing character in str at ith position of the string
+       if(sub.contains(str))//checking if sub contains str
+         {
+           int a=sub.indexOf(str);
+            sub=sub.substring(a+1);//substring method is used to get a part of Original String as String Object
+          }
+       
+        sub=sub+str;//concatenation of 'sub' with 'str'
+        if(max<sub.length())//comparing max with the length of 'sub'
+         max=sub.length();//assign the length of 'sub' to max
+    }
+
+    if(max==Integer.MIN_VALUE)//check if max is equal to it's original value then return 0
+        return 0;
+    
+     return max;
+}
+
+    }
+
+    
+Output: (Test Case 2)
+The length of longest substring in the given string is:1
+Test Case 3:
+Now if in the above code in main() method I use an empty string that is String a =””, it will return The length of longest substring in the given string is:0
+Test Case 4:
+Input:
+“pqqkew”
+Output:
+The length of longest substring in the given string is:4
+
