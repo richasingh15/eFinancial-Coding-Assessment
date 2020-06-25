@@ -1,0 +1,67 @@
+eFinancial Coding Solution:
+Part 3:
+To find the Kth row of Pascal’s Triangle:
+Input k = 4
+Solution:
+I am using JAVA to solve the above problem statement. According to the problem statement we have to find the kth row of Pascal’s triangle where k= 4.
+NOTE: I am assuming row Index is starting at 0
+I am using an Arraylist of Integers to store the values of the kth row. It is defined that 1st element of each row is 1. If the user wants to find the 0th row of a Pascal’s triangle then the returned value is 1. I have generated a previous row of the kth row by (rowIndex -1). Now using FOR loop to iterate using previous row, add() method is used in Arraylist to add values (here the value is the generated current row). Finally then I have returned the current row(curr_row).
+
+Code:
+package efinancial_part3;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Richa Singh
+ */
+public class Efinancial_Part3 {
+
+    /**
+     * @param args the command line arguments
+     */
+    // Function to find the elements of rowIndex in Pascal's Triangle 
+    public static ArrayList<Integer> getRow(int rowIndex) 
+    { 
+        ArrayList<Integer> curr_row = new ArrayList<Integer>(); 
+        // 1st element of every row is 1 
+        curr_row.add(1); 
+  
+        // Check if the row that has to be returned is the first row 
+        if (rowIndex == 0) { 
+            return curr_row; 
+        } 
+        // Generate the previous row 
+        ArrayList<Integer> prev = getRow(rowIndex - 1); 
+  
+        for (int i = 1; i < prev.size(); i++) { 
+            // Generate the elements of the current row by the help of the previous row 
+            int curr = prev.get(i - 1)+ prev.get(i); 
+            curr_row.add(curr); 
+        } 
+       curr_row.add(1); 
+  
+        // Return the row 
+        return curr_row; 
+    } 
+  
+    public static void main(String[] args) 
+    { 
+        int k = 4; 
+        ArrayList<Integer> arr = getRow(k); 
+  
+        for (int i = 0; i < arr.size(); i++) { 
+            if (i == arr.size() - 1) 
+                System.out.print(arr.get(i)); 
+            else
+                System.out.print(arr.get(i) + ", "); 
+        } 
+    } 
+} 
+    
+Output: (Test Case)
+run:
+1, 4, 6, 4, 1
+ 
+
